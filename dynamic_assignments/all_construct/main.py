@@ -1,16 +1,13 @@
 class AllConstructor(object):
-
-    merged_words = {}
-
-    def all_construct(self, target_word: str, word_bank: list) -> list:
+    def all_construct_possibilities(self, target_word: str, word_bank: list) -> list:
         if target_word == "":
             return [[]]
-        all_ways = []
 
+        all_ways = []
         for word in word_bank:
             if target_word.startswith(word):
                 suffix = target_word[len(word) :]
-                suffix_ways = self.all_construct(suffix, word_bank)
+                suffix_ways = self.all_construct_possibilities(suffix, word_bank)
                 target_ways = self.add_word_to_start(word, suffix_ways)
                 all_ways = all_ways + target_ways
         return all_ways
@@ -23,5 +20,7 @@ class AllConstructor(object):
 
 
 construct = AllConstructor()
-answer = construct.all_construct("purple", ["purp", "p", "ur", "le", "purpl"])
+answer = construct.all_construct_possibilities(
+    "purple", ["purp", "p", "ur", "le", "purpl"]
+)
 print(answer)
